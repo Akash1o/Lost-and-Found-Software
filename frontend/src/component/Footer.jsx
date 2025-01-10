@@ -1,7 +1,11 @@
 import React from 'react'
 import logo from '../images/lost.png'
+import { useNavigate } from "react-router-dom";
+
 
 const Footer = () => {
+
+
   return (
     <div className='flex border-t-2 border-gray-400 justify-between '>
 
@@ -11,7 +15,7 @@ const Footer = () => {
 
         <div>
             <h3 className='font-bold mt-2'>Site</h3>
-            <p>Lost</p>
+            <p >Lost</p>
             <p>Report Lost</p>
             <p>Found</p>
             <p>Report Found</p>

@@ -3,7 +3,12 @@ module.exports = {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Lato', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif'], 
+      },
+    },
   },
   plugins: [],
 }

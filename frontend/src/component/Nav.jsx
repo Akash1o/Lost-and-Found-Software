@@ -12,7 +12,7 @@ const Nav = () => {
     }
   return (
     <div className="flex justify-between p-2 border-b-2 border-gray-300 items-center ">
-      <div className="flex ">
+      <div className="flex cursor-pointer " onClick={()=>handleNavigate('/')}>
         <div>
           <img src={lost} alt="logo" className="w-12 h-12" />
         </div>
@@ -34,8 +34,9 @@ const Nav = () => {
         </ul>
       </div>
 
-      <div className="p-2 items-center bg-blue-400 rounded-md hover:bg-gray-400">
-        <button className=" ">Sign Out</button>
+      <div className="p-2 items-center ">
+      <button className=" hover:bg-red-500 mr-3  rounded-sm p-1">Log In</button>
+        <button className=" rounded-sm hover:bg-gray-400 p-1">Sign Out</button>
       </div>
 
     </div>
