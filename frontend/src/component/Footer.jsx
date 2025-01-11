@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../images/lost.png'
 import { useNavigate } from "react-router-dom";
 
 
 const Footer = () => {
+    const [navState,setNavState]=useState()
+    const navigate=useNavigate()
+
+    const handleNavigate=(path)=>{
+        setNavState(path)
+        navigate(path)
+    }
 
 
   return (
@@ -15,8 +22,8 @@ const Footer = () => {
 
         <div>
             <h3 className='font-bold mt-2'>Site</h3>
-            <p >Lost</p>
-            <p>Report Lost</p>
+            <p onClick={()=>handleNavigate('/lost')} className='cursor-pointer'>Lost</p>
+            <p onClick={()=>handleNavigate('/reportlost')} className='cursor-pointer'>Report Lost</p>
             <p>Found</p>
             <p>Report Found</p>
 
