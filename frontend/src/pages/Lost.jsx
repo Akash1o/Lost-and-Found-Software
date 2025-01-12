@@ -38,7 +38,8 @@ const Lost = () => {
         </button>
       </div>
 
-      <ul className="flex justify-between gap-2 flex-wrap">
+      <div>
+        {formData && formData.length > 0? <ul className="flex justify-between gap-2 flex-wrap">
         {formData.map((items, index) => (
           <li
             key={index}
@@ -80,7 +81,10 @@ const Lost = () => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul>:<h3 className="h-[200px] flex justify-center text-4xl text-red-500 items-center">There is no items to show.</h3>}
+      </div>
+
+      
     </div>
   );
 };
