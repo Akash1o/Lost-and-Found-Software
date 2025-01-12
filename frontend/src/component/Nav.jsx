@@ -35,7 +35,7 @@ const Nav = () => {
       </div>
 
       <div className="p-2 items-center ">
-      <button className=" hover:bg-red-500 mr-3  rounded-sm p-1">Log In</button>
+      <button className=" hover:bg-red-500 mr-3  rounded-sm p-1" onClick={()=>handleNavigate('/login')}>Log In</button>
         <button className=" rounded-sm hover:bg-gray-400 p-1">Sign Out</button>
       </div>
 
