@@ -8,7 +8,8 @@ import ReportLost from './pages/ReportLost';
 import Found from './pages/Found';
 import ReportFound from './pages/ReportFound';
 import Profile from './pages/Profile';
-
+import { FormDataProvider } from './context/FormdataContext';
+import NewFoundFormdata from './context/NewFoundFormdata';
 function App() {
   return (
     <div className="App">
