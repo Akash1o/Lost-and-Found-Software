@@ -1,17 +1,25 @@
-import React from "react";
+
 import { useFormData } from "../context/FormdataContext";
 import man from "../images/ippo.png";
 import lo from "../images/lo.png";
+import { useNavigate } from "react-router-dom";
 
 const Lost = () => {
   const { formData } = useFormData();
 
+  const navigate=useNavigate()
+
+  const handleNavigate=(path)=>{
+
+    navigate(path)
+  }
+
   return (
-    <div>
+    <div className=" bg-gradient-to-br from-pink-100 to-yellow-100">
       <h1
         className="flex justify-center"
         style={{
-          background: "linear-gradient(to right, #FF0000, #0000FF, #00FF00)",
+         background: "linear-gradient(to right, #991313 0%, #FF1F1F 75%)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
@@ -30,6 +38,7 @@ const Lost = () => {
         />
         <button
           className="flex items-center px-4 rounded-md text-white"
+          onClick={()=>handleNavigate("/reportlost")}
           style={{
             background: "linear-gradient(to right, #991313 0%, #FF1F1F 75%)",
           }}
@@ -39,7 +48,7 @@ const Lost = () => {
       </div>
 
       <div>
-        {formData && formData.length > 0? <ul className="flex justify-between gap-2 flex-wrap">
+        {formData && formData.length > 0? <ul className="flex justify-center gap-2 flex-wrap">
         {formData.map((items, index) => (
           <li
             key={index}
@@ -70,7 +79,7 @@ const Lost = () => {
                 <p>Location:{items.location}</p>
               </div>
 
-              <div className="my-4 h-[150px] overflow-y-auto">
+              <div className="my-4 h-[80px] overflow-y-auto">
                 <p>{items.description}</p>
               </div>
               <div className="flex justify-end">

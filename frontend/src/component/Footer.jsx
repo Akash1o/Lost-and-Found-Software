@@ -14,6 +14,9 @@ const Footer = () => {
 
 
   return (
+    <div>
+
+
     <div className='flex border-t-2 border-gray-400 justify-between '>
 
         <div>
@@ -24,8 +27,8 @@ const Footer = () => {
             <h3 className='font-bold mt-2'>Site</h3>
             <p onClick={()=>handleNavigate('/lost')} className='cursor-pointer'>Lost</p>
             <p onClick={()=>handleNavigate('/reportlost')} className='cursor-pointer'>Report Lost</p>
-            <p>Found</p>
-            <p>Report Found</p>
+            <p onClick={()=>handleNavigate('/found')} className='cursor-pointer'>Found</p>
+            <p onClick={()=>handleNavigate('/reportfound')} className='cursor-pointer'>Report Found</p>
 
         </div>
 
@@ -64,6 +67,7 @@ const Footer = () => {
             </div>
         </div>
       
+    </div>
     </div>
   )
 }
