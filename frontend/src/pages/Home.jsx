@@ -13,7 +13,7 @@ const Home = () => {
   }
 
   return (
-    <div className='flex flex-row justify-start items-center pl-[385px] pb-[87px] '>
+    <div className='flex flex-row justify-start items-center pl-[385px] pb-[87px] bg-gradient-to-br from-pink-100 to-yellow-100 '>
       
        <div className='flex flex-col mt-[34px] '>
         <h1 className='text-7xl font-heading text-green-500'>Find &</h1>

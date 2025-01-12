@@ -36,9 +36,8 @@ alert("Please fill all the fields");
     }
     else{
       updateFormData(newFormData)
-      console.log(newFormData);
-  
-      console.log(formData);
+      // console.log(newFormData);
+      // console.log(formData);
       alert("Form submitted successfully");
       setNewFormData({
         name: '',
@@ -52,7 +51,7 @@ alert("Please fill all the fields");
    
   };
   return (
-    <div>
+    <div className='bg-gradient-to-br from-pink-100 to-yellow-100'>
       <h1
         className="flex justify-center"
         style={{
