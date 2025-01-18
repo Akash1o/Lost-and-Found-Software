@@ -244,22 +244,4 @@ alert("Please fill all the fields");
 
 export default ReportLost;
 
-// try{
-//   const dataToSave={...formData};
-//   const jsonData=JSON.stringify(dataToSave);
 
-//   const response=await fetch('/save-data.json',{
-//     method:'post',
-//     headers:{
-//       'Content-Type': 'application/json',
-//     },
-//     body:jsonData,
-//   });
-//   if(!response.ok){
-//     throw new Error('Failed to save data.');
-//   }
-//   console.log('Data saved successfully!');
-//       }
-//       catch(error){
-//         console.error('Error saving data:', error);
-//       }
