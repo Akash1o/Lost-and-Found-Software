@@ -21,23 +21,31 @@ if ($conn->connect_error) {
 function uploadFile($file)
 {
     $upload_dir = "uploads/";
+    //created a folder name uplaods 
+
     $photo_name = time() . "_" . basename($file["name"]);
+    //create a copy of original file with time_originalfilename.
+
     $upload_path = $upload_dir . $photo_name;
+    //then the path will be shown like uplaods/02102_original,png
 
     // Check if directory exists and create if not
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true); // Create directory if it doesn't exist
     }
+   // 0777 gives full read, write, and execute permissions to owner, group, and others.
 
     // Move uploaded file to the server
     if (move_uploaded_file($file["tmp_name"], $upload_path)) {
+       //move uplaod file moves the temp file(files from form which are stores in browser)
+       // to uplaoed path
+       
         return $upload_path; // Return the file path if upload is successful
     } else {
         return false; // Return false if the upload fails
     }
 }
 
-// Check if it's a POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if all required fields are present
     if (
@@ -48,12 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         isset($_POST["description"]) &&
         isset($_FILES["photo"])
     ) {
-        // Escape strings to prevent SQL injection
-        $name = $conn->real_escape_string($_POST["name"]);
-        $item = $conn->real_escape_string($_POST["item"]);
-        $location = $conn->real_escape_string($_POST["location"]);
-        $date = $conn->real_escape_string($_POST["date"]);
-        $description = $conn->real_escape_string($_POST["description"]);
+        // Retrieve form data directly
+        $name = $_POST["name"];
+        $item = $_POST["item"];
+        $location = $_POST["location"];
+        $date = $_POST["date"];
+        $description = $_POST["description"];
 
         // Handle file upload
         $photo_path = uploadFile($_FILES["photo"]);
@@ -64,9 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     VALUES ('$name', '$item', '$location', '$date', '$description', '$photo_path')";
 
             if ($conn->query($sql) === TRUE) {
-                echo json_encode(["success" => true, "message" => "Form submitted successfully"]);
+                echo json_encode(["success" => true, "message" => "Your Form Submitted Succesfully."]);
             } else {
-                echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+                echo json_encode(["success" => false, "message" => "Error in Database: " .  $conn->error]);
             }
         } else {
             echo json_encode(["success" => false, "message" => "Failed to upload photo"]);
@@ -77,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     echo json_encode(["success" => false, "message" => "Invalid request method"]);
 }
+
 
 $conn->close();
 ?>

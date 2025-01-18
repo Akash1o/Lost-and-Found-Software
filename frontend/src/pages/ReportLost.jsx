@@ -40,25 +40,11 @@ const ReportLost = () => {
 alert("Please fill all the fields");
    return ;
     }
-    // else{
-    //   updateFormData(newFormData)
-      // console.log(newFormData);
-      // console.log(formData);
-    //   alert("Form submitted successfully");
-    //   setNewFormData({
-    //     name: '',
-    //     item: '',
-    //     location: '',
-    //     date: '',
-    //     description: '',
-    //     photo: null,
-    //   });
-    // }
-
+   
     setLoading(true);
      try{
-        const formData =new FormData();
-        formData.append("name", name);
+        const formData =new FormData(); //to send data in http request
+      formData.append("name", name);
       formData.append("item", item);
       formData.append("location", location);
       formData.append("date", date);
