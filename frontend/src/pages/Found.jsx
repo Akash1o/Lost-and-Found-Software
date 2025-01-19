@@ -1,16 +1,40 @@
 
-import { useFoundFormData } from '../context/NewFoundFormdata'
+import { useEffect, useState } from 'react';
 import man from "../images/ippo.png";
 import lo from "../images/search.png";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Found = () => {
-  const {foundFormDataArray}=useFoundFormData()
+  const[foundDataList,setFoundDataList]=useState([]);
+
+  
   const navigate=useNavigate()
 
   const handleNavigate=(path)=>{
     navigate(path)
   }
+
+  useEffect(()=>{
+    axios.get("http://localhost/backend/found.php")
+    .then(response=>{
+      if(response.data.success){
+
+        setFoundDataList(response.data.items)
+      }
+      else{
+        console.log("no data found");
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+    },[])
+  });
+
+
+
+  
+
   return (
     <div className=' bg-gradient-to-br from-pink-100 to-yellow-100'>
           <h1
@@ -31,7 +55,7 @@ const Found = () => {
             <input
               type="text"
               placeholder="Items Name"
-              className="border-2 border-blue-400 rounded-full p-2 w-[350px] mr-4"
+              className="border-2 border-blue-400 text-center rounded-full p-2 w-[350px] mr-4"
             />
             <button
               className="flex items-center px-4 rounded-md text-white"
@@ -45,8 +69,8 @@ const Found = () => {
           </div>
     
           <div>
-            {foundFormDataArray && foundFormDataArray.length > 0? <ul className="flex justify-center gap-2 flex-wrap">
-            {foundFormDataArray.map((items, index) => (
+            {foundDataList && foundDataList.length > 0? <ul className="flex justify-center gap-2 flex-wrap">
+            {foundDataList.map((items, index) => (
               <li
                 key={index}
                 className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full sm:w-1/2  md:w-1/4 lg:w-1/5 xl:w-1/5 "
@@ -66,7 +90,7 @@ const Found = () => {
                 <div>
                   {
                     <img
-                      src={URL.createObjectURL(items.photo)}
+                    src={`http://localhost/backend/${items.photoPath}`}
                       alt={items.title}
                       className="my-4  object-cover w-full h-[150px]"
                     />
