@@ -18,7 +18,7 @@ const Nav = () => {
         </div>
 
         <div>
-          <span className="font-bold text-2xl">I FOUND </span>
+          <span className="font-bold text-2xl">Saman Khoji </span>
           <p className="">Discover.Connect.Reclaim</p>
         </div>
       </div>
@@ -36,7 +36,7 @@ const Nav = () => {
 
       <div className="p-2 items-center ">
       <button className=" hover:bg-red-500 mr-3  rounded-sm p-1" onClick={()=>handleNavigate('/login')}>Log In</button>
-        <button className=" rounded-sm hover:bg-gray-400 p-1">Sign Out</button>
+        <button className=" rounded-sm hover:bg-gray-400 p-1" onClick={()=>handleNavigate('/logout')}>Sign Out</button>
       </div>
 
     </div>

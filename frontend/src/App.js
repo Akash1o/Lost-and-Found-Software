@@ -10,6 +10,7 @@ import ReportFound from './pages/ReportFound';
 import Profile from './pages/Profile';
 import { FormDataProvider } from './context/FormdataContext';
 import NewFoundFormdata from './context/NewFoundFormdata';
+import Login from './pages/Login';
 function App() {
   return (
     <div className="App">
@@ -32,6 +33,7 @@ function App() {
 <Route path='found' element={<Found/>}/>
 <Route path='reportfound' element={<ReportFound/>}/>
 <Route path='profile' element={<Profile/>}/>
+<Route path='login' element={<Login/>}/>
 
 
 </Routes>

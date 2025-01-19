@@ -83,8 +83,8 @@ const Lost = () => {
             {filteredData.map((items, index) => (
               <li
                 key={index}
-                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full sm:w-1/2 md:w-1/4 lg:w-1/5 xl:w-1/5 bg-blue-100 shadow-lg hover:translate-y-[13px] cursor-pointer"
-              >
+                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full sm:w-1/2 md:w-1/4 lg:w-1/5 xl:w-1/5 bg-blue-100 shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300"
+                >
                 <div className="flex gap-2 items-center">
                   <img
                     src={man}
