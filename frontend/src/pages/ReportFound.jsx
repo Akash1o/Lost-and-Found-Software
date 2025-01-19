@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useFoundFormData } from '../context/NewFoundFormdata'
+import axios from 'axios'
 
 const ReportFound = () => {
   const {foundFormDataArray,updatedFoundFormData}=useFoundFormData()
+  // const[foundDataList,setFoundDataList]=useState([])
 
   const[foundFormData,setFoundFormData]=useState({
     name: '',
@@ -35,7 +37,27 @@ else{
   // console.log(foundFormData);
   // console.log(foundFormDataArray);
 
-  updatedFoundFormData(foundFormData);
+  const foundFormData=new FormData();
+  foundFormData.append("name",name);
+  foundFormData.append("item",item);
+  foundFormData.append("location",location);
+  foundFormData.append("date",date);
+  foundFormData.append("description",description);
+  foundFormData.append("photo",photo);
+
+   axios.post("http://localhost/backend/reportFound.php",foundFormData,{
+    headers:{
+      "Content-Type":"multipart/form-data"
+    }
+  })
+  .then(response=>{
+console.log("upload sucessfully",response.data)
+  })
+  .catch(error=>{
+    console.log("error while uploading",error)
+  });
+
+  // updatedFoundFormData(foundFormData);
   alert("Form submitted sucessfully");
 
   setFoundFormData({
