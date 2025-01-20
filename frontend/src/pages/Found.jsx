@@ -13,6 +13,7 @@ const Found = () => {
 
   const handleNavigate=(path)=>{
     navigate(path)
+    
   }
 
   useEffect(()=>{
@@ -38,24 +39,23 @@ const Found = () => {
   return (
     <div className=' bg-gradient-to-br from-pink-100 to-yellow-100'>
           <h1
-            className="flex justify-center"
+            className="flex justify-center text-3xl five:text-6xl"
             style={{
               background:'linear-gradient(to right,#00CB14 0%, #00650A 75%)',
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
-              fontSize: "60px",
               fontWeight: "bold",
             }}
           >
             found Items
           </h1>
     
-          <div className="flex justify-center items-center my-4">
+          <div className="flex flex-col five:flex-row gap-3 justify-center items-center my-4">
             <input
               type="text"
               placeholder="Items Name"
-              className="border-2 border-blue-400 text-center rounded-full p-2 w-[350px] mr-4"
+              className="border-2 border-blue-400 text-center rounded-full p-2  w-[70%] five:w-[350px] mr-4"
             />
             <button
               className="flex items-center px-4 rounded-md text-white"
@@ -69,11 +69,11 @@ const Found = () => {
           </div>
     
           <div>
-            {foundDataList && foundDataList.length > 0? <ul className="flex justify-center gap-2 flex-wrap">
+            {foundDataList && foundDataList.length > 0? <ul className="flex justify-center gap-2 flex-wrap w-[90%] mx-auto">
             {foundDataList.map((items, index) => (
               <li
                 key={index}
-                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full sm:w-1/2  md:w-1/4 lg:w-1/5 xl:w-1/5 "
+                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full five:w-1/3 seven:w-1/4 lg:w-1/5 bg-blue-100 shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300"
               >
                 <div className="flex gap-2 items-center">
                   <img
@@ -92,7 +92,7 @@ const Found = () => {
                     <img
                     src={`http://localhost/backend/${items.photoPath}`}
                       alt={items.title}
-                      className="my-4  object-cover w-full h-[150px]"
+                      className="my-4   w-full h-[150px]"
                     />
                   }
                   <div>
