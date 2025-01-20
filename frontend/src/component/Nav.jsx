@@ -65,7 +65,7 @@ const handleCross=()=>{
         </ul>
       </div>
 
-      <div className="p-2 items-center ">
+      <div className="p-2 items-center hidden lg:block ">
       <button className=" hover:bg-red-500 mr-3  rounded-sm p-1" onClick={()=>handleNavigate('/create')}>Log In</button>
         <button className=" rounded-sm hover:bg-gray-400 p-1" onClick={()=>handleNavigate('/logout')}>Sign Out</button>
       </div>

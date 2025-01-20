@@ -65,18 +65,26 @@ const handleLogin=()=>{
 
 
   return (
-    <div className="bg-gradient-to-br from-pink-100 to-yellow-100 h-[600px] flex justify-center items-center">
-      <div className="flex border-2 border-gray-800 bg-gray-600 w-[1000px] h-[490px]">
+    <div className="bg-gradient-to-br from-pink-100 to-yellow-100 h-screen flex justify-center items-center">
+      <div className="flex border-2 border-gray-800 bg-gray-600 w-[90%] max-w-[1000px] h-[490px] rounded-xl shadow-lg">
     
-        <div className="flex-col p-8 w-1/2">
+        {/* Left Section */}
+        <div className='hidden five:block'>
+        <div className="flex-col p-8 w-full md:w-1/2">
           <p className="ml-11 text-2xl font-bold text-red-600 mt-6">Get started</p>
           <span className="font-bold ml-11 text-yellow-300">Search Your Objects</span>
-          <p className="font-bold text-gray-500 ml-11 mb-6">On a one click Sing In away.</p>
-          <img src={log} className="object-contain w-[400px] h-[373px] ml-7" />
+          <p className="font-bold text-gray-500 ml-11 mb-6">On a one-click Sign-In away.</p>
+          <img
+            src={log}
+            alt="login illustration"
+            className="object-contain w-full h-[373px] md:w-[400px] md:h-[373px] mx-auto"
+          />
+        </div>
         </div>
 
    
-        <div className="flex-col p-8 w-1/2 bg-white border-2 border-black rounded-3xl">
+   {/* Right Section (Form) */}
+   <div className="flex-col p-8 w-full md:w-1/2 bg-white border-2 border-black rounded-3xl">
           <p className="font-bold text-lg text-center">Create Account</p>
        
           <form onSubmit={handleForm}
@@ -108,7 +116,7 @@ const handleLogin=()=>{
             <button className="bg-blue-600 text-white p-2 rounded-md">Create Account</button>
         
           </form>
-          <button onClick={handleLogin}  className= 'bg-red-600 w-[430px] text-white p-2 rounded-md mt-3 shadow-sm'>Login Your Account</button>
+          <button onClick={handleLogin}  className= 'bg-red-600 w-full text-white p-2 rounded-md mt-3 shadow-sm'>Login Your Account</button>
 
 
         </div>
