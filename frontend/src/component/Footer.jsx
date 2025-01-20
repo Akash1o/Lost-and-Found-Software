@@ -46,7 +46,7 @@ const Footer = () => {
 
         <div className='flex items-center'>
             <div className='font-bold'>
-            <span>&#169; Copyright 2025 Lost and Found</span>
+            <span>&#169; Copyright 2025 Saman Khoji</span>
             <span className='block'>All Right Reserved</span>
             </div>
         
@@ -64,7 +64,7 @@ const Footer = () => {
         <div> 
             <h3 className='font-bold mt-2'>Contacts</h3>
             <p>Tel:97 978473923</p>
-            <p>Email:lostandfound2025@gmail.com</p>
+            <p>Email:samankhoji2025@gmail.com</p>
     <div className='flex gap-4 mt-2'>
 <img src={twitter} alt="twitter" className='w-8 h-8 object-cover cursor-pointer' />
 <img src={facebook} alt="facebook" className='w-8 h-8 object-cover cursor-pointer'/>
