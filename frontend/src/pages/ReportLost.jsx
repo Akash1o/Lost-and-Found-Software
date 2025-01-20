@@ -39,8 +39,8 @@ const ReportLost = () => {
     if (!name || !item || !location || !date || !description || !photo){
 alert("Please fill all the fields");
    return ;
-    }
-   
+  }
+  
     setLoading(true);
      try{
         const formData =new FormData(); //to send data in http request

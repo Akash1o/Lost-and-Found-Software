@@ -4,19 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Database connection
-$host = "localhost";
-$dbname = "lost_and_found";
-$username = "root";
-$password = ""; // Replace with your MySQL password if applicable
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["success" => false, "message" => "Database connection failed: " . $conn->connect_error]));
-}
-
+include "DatabaseCon.php";
 // Function to handle file upload
 function uploadFile($file)
 {

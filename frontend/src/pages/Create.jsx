@@ -1,43 +1,49 @@
 import React, { use, useState } from 'react';
 import log from '../images/log.png';
 import axios from 'axios';
-
-function Login() {
+import { useNavigate } from 'react-router-dom';
+function Create() {
+  const Navigate = useNavigate();
   const[input,setInput] =useState ({
-
+    fullname:'',
     email:'',
     password:'',
   })
   const handleForm =async(e)=>{
      e.preventDefault();
-//      const{fullname,email,password} =input;
+     const{fullname,email,password} =input;
     
-//      try{
-//       const LoginData = new FormData();
-//       LoginData.append("fullname",fullname);
-//       LoginData.append("email",email);
-//       LoginData.append("password",password);
+     if (!fullname|| !email|| !password ){
+ alert("Please fill all the fields");
+    return ;
+   }
+    
+     try{
+      const LoginData = new FormData();
+      LoginData.append("fullname",fullname);
+      LoginData.append("email",email);
+      LoginData.append("password",password);
  
-//         const response = await axios.post("http://localhost/backend/Create.php", LoginData,{
-//            headers:{
-//              "Content-Type": "multipart/form-data",
-//                  }
-//            });
-//            if(response.status===200){
-//              alert(response.data.message);
-//              setInput({
-//                fullname:"",
-//                email:"",
-//                password:"", 
-//              });
+        const response = await axios.post("http://localhost/backend/Create.php", LoginData,{
+           headers:{
+             "Content-Type": "multipart/form-data",
+                 }
+           });
+           if(response.status===200){
+             alert(response.data.message);
+             setInput({
+               fullname:"",
+               email:"",
+               password:"", 
+             });
  
-//             }
-//             console.log(response);
+            }
+            console.log(response);
  
-//    }    catch(error){
-//      console.error("erro in submitting :", error);
-//      alert("Failed to submit the form. Please try again!!")
-//    }
+   }    catch(error){
+     console.error("erro in submitting :", error);
+     alert("Failed to submit the form. Please try again!!")
+   }
         
       } 
    
@@ -49,6 +55,9 @@ function Login() {
     setInput({...input,[name]:value})
   }
 
+const handleLogin=()=>{
+   Navigate('/login');
+}
 
   
 
@@ -72,7 +81,14 @@ function Login() {
        
           <form onSubmit={handleForm}
           className="flex flex-col mt-4">
-          
+            <input 
+              type="text" 
+              name='fullname'
+              value={input.fullname}
+              onChange={handleChange}
+              placeholder="FullName" 
+              className="mb-4 p-2 border-2 border-gray-300 rounded-md"
+            />
             <input 
               type="email" 
               name='email'
@@ -89,9 +105,10 @@ function Login() {
               placeholder="Password" 
               className="mb-4 p-2 border-2 border-gray-300 rounded-md"
             />
-
-          <button   className='bg-red-600 text-white p-2 rounded-sm mt-3'>Login  </button>
+            <button className="bg-blue-600 text-white p-2 rounded-md">Create Account</button>
+        
           </form>
+          <button onClick={handleLogin}  className= 'bg-red-600 w-[430px] text-white p-2 rounded-md mt-3 shadow-sm'>Login Your Account</button>
 
 
         </div>
@@ -100,4 +117,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Create;
