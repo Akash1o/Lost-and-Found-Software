@@ -75,13 +75,12 @@ console.log("upload sucessfully",response.data)
     <div className='bg-gradient-to-br from-pink-100 to-yellow-100'>
        
       <h1
-        className="flex justify-center"
+        className="flex justify-center text-3xl six:text-6xl"
         style={{
           background: "linear-gradient(to right, #FF0000, #0000FF, #00FF00)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
-          fontSize: "60px",
           fontWeight: "bold",
         }}
       >
@@ -90,7 +89,7 @@ console.log("upload sucessfully",response.data)
 
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-300 p-6 rounded-lg shadow-md sm:w-[60%] w-full  m-0 mx-auto mb-4"
+        className="bg-gray-300 p-6 rounded-lg shadow-md sm:w-[60%] w-[90%]  m-0 mx-auto mb-4"
       >
         <div className="mb-4">
           <label
