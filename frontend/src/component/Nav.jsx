@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import lost from "../images/lost.png";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-const Nav = ({ isLoggedIn, handleLogout }) => {
+const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
   const [popUp, setPopUp] = useState(false);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    axios
+      .get('http://localhost/backend/Logout.php') // Log out the user from the session
+      .then(() => {
+        setIsLoggedIn(false); // Update the state in App.js to log the user out
+        navigate("/login"); // Redirect to the login page
+      })
+      .catch((error) => {
+        console.error('Error logging out', error);
+      });
+  };
 
   const handlePopUp = () => {
     setPopUp(!popUp);
@@ -71,7 +84,7 @@ const Nav = ({ isLoggedIn, handleLogout }) => {
         </div>
       )}
 
-      
+      {/* Mobile Menu Button */}
       <div className="block lg:hidden">
         <svg
           width="32"
@@ -89,7 +102,7 @@ const Nav = ({ isLoggedIn, handleLogout }) => {
         </svg>
       </div>
 
-     
+      {/* Pop-up Menu */}
       {popUp && isLoggedIn && (
         <div className="absolute top-[80px] right-4 bg-white p-4 shadow-md rounded-md">
           <ul className="flex flex-col gap-4">
@@ -133,7 +146,7 @@ const Nav = ({ isLoggedIn, handleLogout }) => {
         </div>
       )}
 
-            {/* Login/Logout Button changes according to log and out */}
+      {/* Login/Logout Button changes according to logged-in status */}
       <div className="hidden lg:block">
         {isLoggedIn ? (
           <button

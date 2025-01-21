@@ -30,24 +30,15 @@ function App() {
       });
   }, []);
 
-  const handleLogout = () => {
-    axios
-      .get('http://localhost/backend/Logout.php') // Log out the user from the session
-      .then(() => {
-        setIsLoggedIn(false); // Update the state to log the user out
-      })
-      .catch((error) => {
-        console.error('Error logging out', error);
-      });
-  };
+
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
         <Routes>
           <Route path="/" index element={<Home />} />
-          <Route path="/create" index element={<Create />} />
+          <Route path="/create"  element={<Create />} />
 
           {/* Public Routes */}
           <Route path="lost" element={isLoggedIn ? <Lost /> : <Navigate to="/login" />} />
@@ -55,9 +46,8 @@ function App() {
           <Route path="found" element={isLoggedIn ? <Found /> : <Navigate to="/login" />} />
           <Route path="reportfound" element={isLoggedIn ? <ReportFound /> : <Navigate to="/login" />} />
 
-          {/* Protected Routes (only accessible if logged in) */}
           <Route path="profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
-          <Route path="create" element={isLoggedIn ? <Create /> : <Navigate to="/login" />} />
+
 
           {/* Login Route */}
           <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
