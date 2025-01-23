@@ -1,5 +1,5 @@
 <?php
-// Allow requests from any domain (change "*" to a specific domain for security)
+// Allow requests from any domain 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -58,17 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo json_encode(['success' => 'false', 'message' => 'Invalid server request']);
 }
 
-$query = "INSERT INTO found_items (name, item, location, date, description, photoPath) 
+$query = "INSERT INTO found_items (name, item, location, date, description, photo_paht) 
                     VALUES ('$name', '$item', '$location', '$date', '$description', '$filePath')";
 $result=mysqli_query($conn,$query);
 
 if($result){
-    echo "DATA INSERTED SUCESSFULLY";
+    echo json_encode(["success" => true, "message" => "Your Form Submitted Succesfully."]);
 }
 else{
-    echo "FAILED TO INSERT DATA ";
+    echo json_encode(["success"=>false,"message" =>"Error in Database: " .  $conn->error]); 
 }
 
-
-header('Content-Type:application/json');
-echo json_encode($response);
+$conn->close(); 
+?>
