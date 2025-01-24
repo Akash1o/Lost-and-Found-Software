@@ -90,7 +90,7 @@ const Found = () => {
                 <div>
                   {
                     <img
-                    src={`http://localhost/backend/${items.photoPath}`}
+                    src={`http://localhost/backend/${items.photo_paht}`}
                       alt={items.title}
                       className="my-4   w-full h-[150px]"
                     />

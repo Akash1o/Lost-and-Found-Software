@@ -3,8 +3,13 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const ReportFound = () => {
+<<<<<<< HEAD
 
 
+=======
+  // const {foundFormDataArray,updatedFoundFormData}=useFoundFormData()
+  // // const[foundDataList,setFoundDataList]=useState([])
+>>>>>>> main
 
   const[foundFormData,setFoundFormData]=useState({
     name: '',
@@ -52,13 +57,16 @@ else{
   })
   .then(response=>{
 console.log("upload sucessfully",response.data)
+
+    alert(response.data.message);
   })
+
   .catch(error=>{
     console.log("error while uploading",error)
   });
 
   // updatedFoundFormData(foundFormData);
-  alert("Form submitted sucessfully");
+
 
   setFoundFormData({
     name: '',
