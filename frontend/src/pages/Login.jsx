@@ -108,7 +108,7 @@ function Login({setIsLoggedIn}) {
           </form>
           <button
               onClick={handleCreate}
-              className="bg-blue-600 text-white p-2 rounded-md mt-2 w-[632px]"
+              className="bg-blue-600 text-white p-2 rounded-md mt-2 w-full"
               
             >
               Create Account
