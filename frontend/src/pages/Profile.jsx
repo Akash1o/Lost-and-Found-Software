@@ -100,13 +100,14 @@ useEffect(()=>{
 
   return (
     <div>
-      <h1 className="flex justify-center text-3xl p-2 text-blue-500">Profile</h1>
-      <div className="w-[90%] six:w-[60%] rounded-md p-2 mx-auto border-2 border-gray-500 items-center flex justify-center">
+      <h1 className="flex justify-center font-bold text-3xl p-2 text-blue-500">Profile</h1>
+      <div className="w-[90%] six:w-[60%] rounded-md p-2 mx-auto border-2 shadow-2xl border-gray-900 mb-4 items-center flex justify-center 
+      bg-gradient-to-r from-gray-300 via-blue-300 to-amber-200">
         {isEdited?<form onSubmit={handleSubmit} className="w-[80%] mx-auto flex justify-center flex-col gap-2 ">
           <div className="flex justify-center">
             <img src={ippo} alt="avatar" className="w-12 h-12 rounded-full object-cover" />
           </div>
-          <label htmlFor="name" className="block font-bold">Name</label>
+          <label htmlFor="name" className="block font-bold text-amber-700">Name</label>
           <input
           id='name'
             type="text"
@@ -116,7 +117,7 @@ useEffect(()=>{
             className="w-[90%] border-2 p-1 rounded-md outline-none border-blue-400"
           />
 
-          <label htmlFor="id" className="block font-bold">ID Number</label>
+          <label htmlFor="id" className="block font-bold text-gray-500">ID Number</label>
           <input
           id='id'
             type="number"
@@ -126,7 +127,7 @@ useEffect(()=>{
             className="w-[90%] border-2 p-1 rounded-md outline-none border-blue-400"
           />
 
-          <label htmlFor="faculty" className="block font-bold">Faculty</label>
+          <label htmlFor="faculty" className="block font-bold text-purple-600">Faculty</label>
           <input
             type="text"
             id='faculty'
@@ -136,7 +137,7 @@ useEffect(()=>{
             className="w-[90%] border-2 p-1 rounded-md outline-none border-blue-400"
           />
 
-          <label htmlFor="contact" className="block font-bold">Contact Number</label>
+          <label htmlFor="contact" className="block font-bold text-green-600">Contact Number</label>
           <input
           id='contact'
             type="number"
@@ -147,21 +148,27 @@ useEffect(()=>{
           />
 
           {isEdited ? (
-            <div className="flex justify-between gap-2">
-              <button
-                type="submit"
-                onClick={handleSave}
-                className="w-[100px] three:w-[150px] ml-none five:ml-auto hover:bg-green-400 bg-green-600 text-white p-2 rounded-md mt-2"
-              >
-                Save
-              </button>
-              <button
-                type="reset"
-                onClick={handleCancel}
-                className="w-[100px] three:w-[150px] ml-none five:ml-auto hover:bg-red-400 bg-red-600 text-white p-2 rounded-md mt-2"
-              >
-                Cancel
-              </button>
+            <div className="flex justify-between gap-2 mb-2">
+    <button
+  type="submit"
+  onClick={handleSave}
+  className="relative w-[100px] three:w-[150px] ml-none five:ml-auto five:mr-[32px] bg-blue-500 text-white p-2 rounded-md mt-2 overflow-hidden group"
+>
+  Save
+  <span className="absolute top-0 left-0 w-full h-[2px] bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right"></span>
+  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+</button>
+
+<button
+  type="reset"
+  onClick={handleCancel}
+  className="relative w-[100px] three:w-[150px] mr-auto five:ml-auto bg-red-600 text-white p-2 rounded-md mt-2 overflow-hidden group"
+>
+  Cancel
+  <span className="absolute top-0 left-0 w-full h-[3px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right"></span>
+  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+</button>
+
             </div>
           ) : 
             <button

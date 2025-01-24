@@ -3,13 +3,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const ReportFound = () => {
-<<<<<<< HEAD
 
 
-=======
-  // const {foundFormDataArray,updatedFoundFormData}=useFoundFormData()
-  // // const[foundDataList,setFoundDataList]=useState([])
->>>>>>> main
+
 
   const[foundFormData,setFoundFormData]=useState({
     name: '',
