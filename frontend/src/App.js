@@ -33,9 +33,8 @@ function App() {
 
 
   return (
-    <div className="App">
       <BrowserRouter>
-        <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
+      <Nav  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
         <Routes>
           <Route path="/" index element={<Home />} />
           <Route path="/create"  element={<Create />} />
@@ -54,7 +53,6 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </div>
   );
 }
 

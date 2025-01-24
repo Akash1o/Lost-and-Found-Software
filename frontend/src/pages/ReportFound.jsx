@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useFoundFormData } from '../context/NewFoundFormdata'
+
 import axios from 'axios'
 
 const ReportFound = () => {
-  const {foundFormDataArray,updatedFoundFormData}=useFoundFormData()
-  // const[foundDataList,setFoundDataList]=useState([])
+
+
 
   const[foundFormData,setFoundFormData]=useState({
     name: '',

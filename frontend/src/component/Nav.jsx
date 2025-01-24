@@ -85,7 +85,7 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
       )}
 
       {/* Mobile Menu Button */}
-      <div className="block lg:hidden">
+      {isLoggedIn? <div className="block lg:hidden">
         <svg
           width="32"
           height="20"
@@ -100,47 +100,61 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
             fill="#1D1B20"
           />
         </svg>
-      </div>
+      </div>:<div className="block lg:hidden">  <button
+            className="bg-blue-500 text-white px-3 py-1 rounded-md"
+            onClick={() => handleNavigate("/login")}
+          >
+            Login
+          </button></div>}
+     
 
       {/* Pop-up Menu */}
       {popUp && isLoggedIn && (
         <div className="absolute top-[80px] right-4 bg-white p-4 shadow-md rounded-md">
           <ul className="flex flex-col gap-4">
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/")}
             >
               Home
             </li>
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/lost")}
             >
               Lost
             </li>
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/reportlost")}
             >
               Report Lost
             </li>
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/found")}
             >
               Found
             </li>
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/reportfound")}
             >
               Report Found
             </li>
             <li
-              className="hover:border-b-2 hover:border-green-500"
+              className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/profile")}
             >
               Profile
+            </li>
+            <li>
+            <button
+            className="bg-red-500 text-white px-3 py-1 rounded-md"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
             </li>
           </ul>
         </div>
@@ -165,6 +179,7 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
         )}
       </div>
     </div>
+  
   );
 };
 
