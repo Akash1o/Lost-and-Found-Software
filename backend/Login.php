@@ -19,8 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // If the user exists, start a session
-            $_SESSION["user"] = $email;  // Store user's email in session
+            // Fetch the user data
+            $user = $result->fetch_assoc();
+
+            // If the user exists, start a session and store the user_id
+            $_SESSION["user_id"] = $user['user_id'];
             echo json_encode(["success" => true, "message" => "Login successful."]);
         } else {
             echo json_encode(["success" => false, "message" => "Invalid email or password."]);
