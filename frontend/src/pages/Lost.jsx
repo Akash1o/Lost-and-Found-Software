@@ -7,7 +7,9 @@ import lo from "../images/lo.png";
 const Lost = () => {
   const [formData, setFormData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   // Handle the navigation to the report page
@@ -17,21 +19,20 @@ const Lost = () => {
 
   // Fetch data from PHP API on component mount
   useEffect(() => {
-    axios
-      .get("http://localhost/backend/Lost.php")
-      .then((response) => {
+    setLoading(true);
     axios
       .get("http://localhost/backend/Lost.php")
       .then((response) => {
         if (response.data.success) {
           setFormData(response.data.item);
         } else {
-          console.log(response.data.message);
+          setError(response.data.message);
         }
+        setLoading(false);
       })
       .catch((error) => {
-      .catch((error) => {
-        console.error("Error while fetching data:", error);
+        setError("Error fetching data.");
+        setLoading(false);
       });
   }, []); // Empty dependency array ensures it only runs once when the component mounts
 
@@ -84,7 +85,11 @@ const Lost = () => {
       </div>
 
       <div className="mt-[55px]">
-        {filteredData.length > 0 ? (
+        {loading ? (
+          <h3>Loading...</h3>
+        ) : error ? (
+          <h3>{error}</h3>
+        ) : filteredData.length > 0 ? (
           <ul className="grid gap-2 grid-cols-1 four:grid-cols-2 nine:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 w-[90%] mx-auto">
             {filteredData.map((items, index) => (
               <li

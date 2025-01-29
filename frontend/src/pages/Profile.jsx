@@ -5,7 +5,7 @@ import axios from "axios";
 const Profile = ({ isLoggedIn }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [allData, setAllData] = useState(true);
-  const [allData, setAllData] = useState(true);
+
   const [detail, setDetail] = useState({
     email: "",
     fullname: "",
@@ -142,9 +142,6 @@ const Profile = ({ isLoggedIn }) => {
             <div className="flex items-center gap-1">
               <h2 className="font-bold">Faculty:</h2>
               <p>{detail.faculty}</p>
-            <div className="flex items-center gap-1">
-              <h2 className="font-bold">Faculty:</h2>
-              <p>{detail.faculty}</p>
             </div>
 
             <div className="flex items-center gap-1">
@@ -156,12 +153,12 @@ const Profile = ({ isLoggedIn }) => {
               <h2 className="font-bold">Email:</h2>
               <p>{detail.email}</p>
             </div>
-<div className="flex justify-end">
-<button type="button" onClick={() => setIsEdited(true)} className=" w-[100px] three:w-[150px] hover:bg-blue-400 bg-blue-600 text-white p-2 rounded-md mt-2">
-              Edit Profile
-            </button>
-</div>
-           
+
+            <div className="flex justify-end">
+              <button type="button" onClick={() => setIsEdited(true)} className=" w-[100px] three:w-[150px] hover:bg-blue-400 bg-blue-600 text-white p-2 rounded-md mt-2">
+                Edit Profile
+              </button>
+            </div>
           </div>
         )}
       </div>
