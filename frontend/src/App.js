@@ -28,7 +28,7 @@ function App() {
       .catch((error) => {
         console.error('Error checking session', error);
       });
-  }, []);
+  }, [isLoggedIn]);
 
 
 
@@ -45,7 +45,7 @@ function App() {
           <Route path="found" element={isLoggedIn ? <Found /> : <Navigate to="/login" />} />
           <Route path="reportfound" element={isLoggedIn ? <ReportFound /> : <Navigate to="/login" />} />
 
-          <Route path="profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
+          <Route path="profile" element={isLoggedIn ? <Profile isLoggedIn={isLoggedIn}/> : <Navigate to="/login" />} />
 
 
           {/* Login Route */}

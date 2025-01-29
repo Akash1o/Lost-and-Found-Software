@@ -22,6 +22,30 @@ function Login({setIsLoggedIn}) {
     setInput({ ...input, [name]: value });
   };
 
+  const handleLogin = () => {
+    const { email, password } = input;
+
+    
+  
+    if (email && password) {
+      const formData = new URLSearchParams();
+      formData.append('email', email);
+      console.log(email);
+      axios
+        .post(`http://localhost/backend/SessionMan.php`, formData) 
+        .then((response) => {
+          if (response.data && response.data.success) {
+            console.log("Login success:", response.data); 
+          } else {
+            console.log("Login failed:", response.data);
+          }
+        })
+        .catch((error) => {
+          console.error('There was an error!', error);
+        });
+    }
+  };
+  
   const submit = () => {
     const { email, password } = input;
   
@@ -98,6 +122,7 @@ function Login({setIsLoggedIn}) {
             
               <button
               type="submit"
+              onClick={handleLogin}
               className="bg-red-600 text-white p-2 rounded-md"
               disabled={loading} // Disable button during loading
             >

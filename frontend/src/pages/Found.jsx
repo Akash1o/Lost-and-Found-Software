@@ -29,8 +29,8 @@ const Found = () => {
     })
     .catch(error=>{
       console.log(error);
-    },[])
-  });
+    })
+  },[]);
 
 
 
@@ -90,7 +90,7 @@ const Found = () => {
                 <div>
                   {
                     <img
-                    src={`http://localhost/backend/${items.photo_paht}`}
+                    src={`http://localhost/backend/${items.photoPath}`}
                       alt={items.title}
                       className="my-4   w-full h-[150px]"
                     />

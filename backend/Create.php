@@ -17,13 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         $fullname = $_POST["fullname"];
         $email = $_POST["email"];
         $password = $_POST["password"];
+       $_SESSION["email"]=$email;
 
         // SQL query to insert the data into the database
         $sql = "INSERT INTO users (fullname, email, password)
                 VALUES ('$fullname', '$email', '$password')";
         
         if ($conn->query($sql) === TRUE) {
-            echo json_encode(["success" => true, "message" => "Your form was submitted successfully."]);
+            $sql_profile="INSERT INTO profile (email) VALUES ('$email')";
+            if($conn->query($sql_profile)===TRUE){
+
+                echo json_encode(["success" => true, "message" => "Your account has been created."]);
+            }
         } else {
             echo json_encode(["success" => false, "message" => "Error in Database: " . $conn->error]);
         }
