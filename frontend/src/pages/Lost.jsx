@@ -6,7 +6,7 @@ import lo from "../images/lo.png";
 
 const Lost = () => {
   const [formData, setFormData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   // Handle the navigation to the report page
@@ -16,15 +16,16 @@ const Lost = () => {
 
   // Fetch data from PHP API on component mount
   useEffect(() => {
-    axios.get("http://localhost/backend/Lost.php")
-      .then(response => {
+    axios
+      .get("http://localhost/backend/Lost.php")
+      .then((response) => {
         if (response.data.success) {
           setFormData(response.data.item);
         } else {
           console.log(response.data.message);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error while fetching data:", error);
       });
   }, []); // Empty dependency array ensures it only runs once when the component mounts
@@ -35,11 +36,12 @@ const Lost = () => {
   };
 
   // Filter the formData based on the search query
-  const filteredData = formData.filter(item =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.date.includes(searchQuery)
+  const filteredData = formData.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.date.includes(searchQuery)
   );
 
   return (
@@ -83,7 +85,7 @@ const Lost = () => {
               <li
                 key={index}
                 className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full five:w-1/3 seven:w-1/4 lg:w-1/5 bg-blue-100 shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300"
-                >
+              >
                 <div className="flex gap-2 items-center">
                   <img
                     src={man}
