@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000"); // Allow requests from your frontend
+header("Access-Control-Allow-Origin:*"); // Allow requests from your frontend
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Allow these methods
 header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allow these headers
 

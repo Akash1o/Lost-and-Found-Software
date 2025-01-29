@@ -80,11 +80,11 @@ const Lost = () => {
 
       <div className="mt-[55px]">
         {filteredData.length > 0 ? (
-          <ul className="flex justify-center gap-2 flex-wrap w-[90%] mx-auto">
+          <ul className="grid gap-2 grid-cols-1 four:grid-cols-2 nine:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 w-[90%] mx-auto">
             {filteredData.map((items, index) => (
               <li
                 key={index}
-                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full five:w-1/3 seven:w-1/4 lg:w-1/5 bg-blue-100 shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300"
+                className="border-2 rounded-md border-gray-600 p-4 m-4 mx-auto w-full  bg-blue-100 shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300"
               >
                 <div className="flex gap-2 items-center">
                   <img

@@ -1,6 +1,6 @@
 <?php
 
-session_start();  // Start the session
+session_start();
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
@@ -9,87 +9,66 @@ header("Access-Control-Allow-Headers: Content-Type");
 include('DatabaseCon.php');
 
 $method = $_SERVER["REQUEST_METHOD"];
-$data = json_decode(file_get_contents('php://input'), true);
 
+switch ($method) {
+    case 'GET':
+        if (!isset($_GET['idNumber'])) {
+            echo json_encode(["success" => false, "message" => "Missing idNumber parameter"]);
+            exit();
+        }
 
-$email = $_SESSION['sandesh'] ?? null; 
+        $idNumber = $_GET['idNumber'];
 
+        $query = "SELECT * FROM users WHERE idNumber = ?";
+        if ($stmt = $conn->prepare($query)) {
+            $stmt->bind_param("s", $idNumber);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-if ($email) {
-    switch ($method) {
-        case 'GET':
-            // Fetch data based on the email from session
-            $query = "SELECT * FROM profile WHERE email = ?";
-            if ($stmt = $conn->prepare($query)) {
-                $stmt->bind_param("s", $email);
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($result->num_rows > 0) {
-                    $profile = $result->fetch_assoc();
-                    echo json_encode(["success" => true, "profile" => $profile]);
-                } else {
-                    echo json_encode(["success" => false, "message" => "No profile found"]);
-                }
-                $stmt->close();
+            if ($result->num_rows > 0) {
+                $profile = $result->fetch_assoc();
+                echo json_encode(["success" => true, "profile" => $profile]);
             } else {
-                echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+                echo json_encode(["success" => false, "message" => "No profile found"]);
             }
-            break;
+            $stmt->close();
+        } else {
+            echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+        }
+        break;
 
-        case 'POST':
-            // Retrieve data from the request body
-            $name = $data['name'];
-            $id = $data['id'];
-            $faculty = $data['faculty'];
-            $contact = $data['contact'];
+    case 'PUT':
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        if (!isset($data['idNumber']) || !isset($data['fullname']) || !isset($data['faculty']) || !isset($data['contact'])) {
+            echo json_encode(["success" => false, "message" => "Missing required fields"]);
+            exit();
+        }
 
-            // Insert the profile data into the profile table, using the email from the session
-            $sql = "INSERT INTO profile (name, id, faculty, contact, email) VALUES (?, ?, ?, ?, ?)";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sisss", $name, $id, $faculty, $contact, $email);
-                $stmt->execute();
+        $fullname = $data['fullname'];
+        $idNumber = $data['idNumber'];
+        $faculty = $data['faculty'];
+        $contact = $data['contact'];
 
-                if ($stmt->affected_rows > 0) {
-                    echo json_encode(["success" => true, "message" => "Data inserted successfully"]);
-                } else {
-                    echo json_encode(["success" => false, "message" => "Data was not inserted. Error: " . $conn->error]);
-                }
-                $stmt->close();
+        $sql = "UPDATE users SET fullname=?, faculty=?, contact=? WHERE idNumber=?";
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("ssss", $fullname, $faculty, $contact, $idNumber);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                echo json_encode(["success" => true, "message" => "Profile updated successfully"]);
             } else {
-                echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+                echo json_encode(["success" => false, "message" => "No changes made"]);
             }
-            break;
+            $stmt->close();
+        } else {
+            echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+        }
+        break;
 
-        case 'PUT':
-            // Update profile based on the email from the session
-            $name = $data['name'];
-            $id = $data['id'];
-            $faculty = $data['faculty'];
-            $contact = $data['contact'];
-
-            $sql = "UPDATE profile SET name=?, id=?, faculty=?, contact=? WHERE email=?";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sisss", $name, $id, $faculty, $contact, $email);
-                $stmt->execute();
-
-                if ($stmt->affected_rows > 0) {
-                    echo json_encode(["success" => true, "message" => "Data updated successfully"]);
-                } else {
-                    echo json_encode(["success" => false, "message" => "Data was not updated. Error: " . $conn->error]);
-                }
-                $stmt->close();
-            } else {
-                echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
-            }
-            break;
-
-        default:
-            echo json_encode(["success" => false, "message" => "Invalid request method"]);
-            break;
-    }
-} else {
-    echo json_encode(["success" => false, "message" => "User not logged in or no email found in session",'email'=>$email,'data'=>$data]);
+    default:
+        echo json_encode(["success" => false, "message" => "Invalid request method"]);
+        break;
 }
 
 $conn->close();
