@@ -104,6 +104,7 @@ function Login({ setIsLoggedIn }) {
 
             <button
               type="submit"
+              onClick={handleLogin}
               className="bg-red-600 text-white p-2 rounded-md"
               disabled={loading}
             >

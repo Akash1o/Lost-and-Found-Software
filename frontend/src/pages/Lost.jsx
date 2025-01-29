@@ -7,6 +7,7 @@ import lo from "../images/lo.png";
 const Lost = () => {
   const [formData, setFormData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   // Handle the navigation to the report page
@@ -19,12 +20,16 @@ const Lost = () => {
     axios
       .get("http://localhost/backend/Lost.php")
       .then((response) => {
+    axios
+      .get("http://localhost/backend/Lost.php")
+      .then((response) => {
         if (response.data.success) {
           setFormData(response.data.item);
         } else {
           console.log(response.data.message);
         }
       })
+      .catch((error) => {
       .catch((error) => {
         console.error("Error while fetching data:", error);
       });
@@ -36,6 +41,12 @@ const Lost = () => {
   };
 
   // Filter the formData based on the search query
+  const filteredData = formData.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.date.includes(searchQuery)
   const filteredData = formData.filter(
     (item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

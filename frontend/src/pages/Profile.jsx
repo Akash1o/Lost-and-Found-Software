@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import ippo from "../images/ippo.png";
 import axios from "axios";
 
-const Profile = () => {
+const Profile = ({ isLoggedIn }) => {
   const [isEdited, setIsEdited] = useState(false);
+  const [allData, setAllData] = useState(true);
   const [allData, setAllData] = useState(true);
   const [detail, setDetail] = useState({
     email: "",
@@ -138,6 +139,9 @@ const Profile = () => {
               <p>{detail.idNumber}</p>
             </div>
 
+            <div className="flex items-center gap-1">
+              <h2 className="font-bold">Faculty:</h2>
+              <p>{detail.faculty}</p>
             <div className="flex items-center gap-1">
               <h2 className="font-bold">Faculty:</h2>
               <p>{detail.faculty}</p>

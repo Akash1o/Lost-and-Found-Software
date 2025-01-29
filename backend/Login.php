@@ -7,6 +7,9 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 include "DatabaseCon.php";
 
+// $data = json_decode(file_get_contents('php://input'), true);
+// $emails=$data['email'];
+
 // Read JSON input
 $data = json_decode(file_get_contents("php://input"), true);
 
