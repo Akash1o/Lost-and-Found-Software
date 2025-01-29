@@ -11,7 +11,6 @@ header('Access-Control-Allow-Headers: Content-Type');
  
 
 if (isset($_SESSION['user'])) {
-   
     // User is logged in
     echo json_encode(['loggedIn' => true]);
 } else {
