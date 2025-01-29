@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -11,24 +11,27 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     // Check if all required fields are set
     if (
         isset($_POST["fullname"]) &&
+        isset($_POST["idNumber"]) &&
+        isset($_POST["faculty"]) &&
+        isset($_POST["contact"]) &&
         isset($_POST["email"]) &&
         isset($_POST["password"])
     ) {
         $fullname = $_POST["fullname"];
+        $idNumber = $_POST["idNumber"];
+        $faculty = $_POST["faculty"];
+        $contact = $_POST["contact"];
         $email = $_POST["email"];
         $password = $_POST["password"];
-       $_SESSION["email"]=$email;
+      
 
         // SQL query to insert the data into the database
-        $sql = "INSERT INTO users (fullname, email, password)
-                VALUES ('$fullname', '$email', '$password')";
+        $sql = "INSERT INTO users (fullname,idNumber,faculty,contact, email, password)
+                VALUES ('$fullname','$idNumber','$faculty','$contact', '$email', '$password')";
         
         if ($conn->query($sql) === TRUE) {
-            $sql_profile="INSERT INTO profile (email) VALUES ('$email')";
-            if($conn->query($sql_profile)===TRUE){
-
                 echo json_encode(["success" => true, "message" => "Your account has been created."]);
-            }
+            
         } else {
             echo json_encode(["success" => false, "message" => "Error in Database: " . $conn->error]);
         }
