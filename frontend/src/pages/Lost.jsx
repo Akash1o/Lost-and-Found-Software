@@ -47,12 +47,6 @@ const Lost = () => {
       item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.date.includes(searchQuery)
-  const filteredData = formData.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.date.includes(searchQuery)
   );
 
   return (
