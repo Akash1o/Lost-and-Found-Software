@@ -10,6 +10,7 @@ import ReportFound from './pages/ReportFound';
 import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 import axios from 'axios';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
 
           {/* Login Route */}
           <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="admin" element={<Admin setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>
         <Footer />
       </BrowserRouter>

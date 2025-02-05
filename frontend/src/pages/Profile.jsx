@@ -78,7 +78,7 @@ const Profile = ({ isLoggedIn }) => {
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Error submitting form");
+      alert("Error submitting your profile..");
     }
 
     handleFetch();
