@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+
 import Nav from './component/Nav';
 import Footer from './component/Footer';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Lost from './pages/Lost';
 import ReportLost from './pages/ReportLost';
@@ -10,20 +12,38 @@ import ReportFound from './pages/ReportFound';
 import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Login from './pages/Login';
-import Admin from './pages/Admin';
-import axios from 'axios';
+import Dashboard from './pages/Dashboard';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
 
-  // Check session status when the app loads
+function AppContent() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Get current location
+  const location = useLocation();
+  const isDashboard = location.pathname === "/dashboard";
+
   useEffect(() => {
-    // Simulate a session check on page load
     axios
-      .get('http://localhost/backend/SessionMan.php') // Backend session check
+      .get('http://localhost/backend/SessionMan.php')
       .then((response) => {
         if (response.data.loggedIn) {
-          setIsLoggedIn(true); // If session is active, set as logged in
+          setIsLoggedIn(true);
+
+          // Check if the logged-in user is "admin@gmail.com"
+          const userEmail = localStorage.getItem("isAdmin");
+          if (userEmail === "admin@gmail.com") {
+            setIsAdmin(true);
+          } else {
+            setIsAdmin(false);
+          }
         }
       })
       .catch((error) => {
@@ -31,30 +51,29 @@ function App() {
       });
   }, [isLoggedIn]);
 
-
-
   return (
-      <BrowserRouter>
-      <Nav  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}  />
-        <Routes>
-          <Route path="/" index element={<Home />} />
-          <Route path="/create"  element={<Create />} />
+    <>
+ 
+      {!isDashboard && <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
 
-          {/* Public Routes */}
-          <Route path="lost" element={isLoggedIn ? <Lost /> : <Navigate to="/login" />} />
-          <Route path="reportlost" element={isLoggedIn ? <ReportLost /> : <Navigate to="/login" />} />
-          <Route path="found" element={isLoggedIn ? <Found /> : <Navigate to="/login" />} />
-          <Route path="reportfound" element={isLoggedIn ? <ReportFound /> : <Navigate to="/login" />} />
+      <Routes>
+        <Route path="/" index element={<Home />} />
+        <Route path="/create" element={<Create />} />
 
-          <Route path="profile" element={isLoggedIn ? <Profile isLoggedIn={isLoggedIn}/> : <Navigate to="/login" />} />
+    
+        <Route path="/lost" element={isLoggedIn ? <Lost /> : <Navigate to="/login" />} />
+        <Route path="/reportlost" element={isLoggedIn ? <ReportLost /> : <Navigate to="/login" />} />
+        <Route path="/found" element={isLoggedIn ? <Found /> : <Navigate to="/login" />} />
+        <Route path="/reportfound" element={isLoggedIn ? <ReportFound /> : <Navigate to="/login" />} />
+        <Route path="/profile" element={isLoggedIn ? <Profile isLoggedIn={isLoggedIn} /> : <Navigate to="/login" />} />
 
+        <Route path="/dashboard" element={isAdmin ? <Dashboard /> : <Navigate to="/" />} />
 
-          {/* Login Route */}
-          <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="admin" element={<Admin setIsLoggedIn={setIsLoggedIn} />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />} />
+      </Routes>
+
+      {!isDashboard && <Footer />}
+    </>
   );
 }
 

@@ -3,7 +3,7 @@ import log from "../images/log.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn,setIsAdmin }) {
   const navigate = useNavigate();
   const [input, setInput] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -40,10 +40,19 @@ function Login({ setIsLoggedIn }) {
         
         // Save idNumber & email in local storage
         localStorage.setItem("idNumber", response.data.idNumber);
-        localStorage.setItem("email", email);
+        // localStorage.setItem("email", email);
+        localStorage.setItem("isAdmin", response.data.isAdmin);
         
         setIsLoggedIn(true);
-        navigate("/"); // Redirect to home page
+        if(response.data.isAdmin){
+          setIsAdmin(true);
+          navigate("/dashboard")
+        }
+        else{
+          setIsAdmin(false);
+          navigate("/"); // Redirect to home page
+
+        }
       } else {
         alert(response.data.message);
       }

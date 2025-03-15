@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $name = $_POST['name'];
         $item = $_POST['item'];
         $location = $_POST['location'];
+        $userId=$_GET['userId'];
         $date = $_POST['date'];
         $description = $_POST['description'];
 
@@ -58,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo json_encode(['success' => 'false', 'message' => 'Invalid server request']);
 }
 
-$query = "INSERT INTO found_items (name, item, location, date, description, photo_paht) 
-                    VALUES ('$name', '$item', '$location', '$date', '$description', '$filePath')";
+$query = "INSERT INTO found_items (name,userId, item, location, date, description, photoPath) 
+                    VALUES ('$name','$userId', '$item', '$location', '$date', '$description', '$filePath')";
 $result=mysqli_query($conn,$query);
 
 if($result){

@@ -2,14 +2,13 @@ import React from 'react'
 import lo from '../images/lo.png';
 import search from '../images/search.png';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import photo from "../images/3photo.png";
 
 const Home = () => {
-  const[navHandle ,setNavHandle] =useState('')
+
   const Navigate = useNavigate();
   const handleNavigation = (path)=>{
-    setNavHandle(path)
+
     Navigate(path)
   }
 

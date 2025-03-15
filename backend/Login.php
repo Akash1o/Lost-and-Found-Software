@@ -7,10 +7,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 include "DatabaseCon.php";
 
-// $data = json_decode(file_get_contents('php://input'), true);
-// $emails=$data['email'];
-
-// Read JSON input
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -31,8 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Store user session
                 $_SESSION["user"] = $user["email"];
 
+               $isAdmin=($email==="admin@gmail.com");
+
                 echo json_encode([
                     "success" => true,
+                    "isAdmin" => $isAdmin,
                     "message" => "Login successful.",
                     "idNumber" => $user["idNumber"]  // Return idNumber for React
                 ]);

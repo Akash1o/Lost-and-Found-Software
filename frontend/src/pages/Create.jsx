@@ -67,8 +67,8 @@ function Create() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-pink-100 to-yellow-100  flex justify-center items-center mt-4 mb-4">
-      <div className="flex border-2 border-gray-800 bg-gray-600 w-[90%]  rounded-xl shadow-lg">
+    <div className="bg-gradient-to-br from-pink-100 to-yellow-100  flex justify-center items-center ">
+      <div className="flex border-2 border-gray-800 bg-gray-600 w-[90%] max-w-[1000px] mt-4 mb-4 rounded-xl shadow-lg">
         {/* Left Section */}
         <div className="hidden five:block">
           <div className="flex-col p-8 w-full md:w-1/2">

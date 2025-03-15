@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ) {
         // Retrieve form data directly
         $name = $_POST["name"];
+        $userId=$_GET['id'];
         $item = $_POST["item"];
         $location = $_POST["location"];
         $date = $_POST["date"];
@@ -56,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($photo_path) {
             // Save form data and photo path to the database
-            $sql = "INSERT INTO lost_items (name, item, location, date, description, photo_path) 
-                    VALUES ('$name', '$item', '$location', '$date', '$description', '$photo_path')";
+            $sql = "INSERT INTO lost_items (name,userId, item, location, date, description, photo_path) 
+                    VALUES ('$name','$userId', '$item', '$location', '$date', '$description', '$photo_path')";
 
             if ($conn->query($sql) === TRUE) {
                 echo json_encode(["success" => true, "message" => "Your Form Submitted Succesfully."]);

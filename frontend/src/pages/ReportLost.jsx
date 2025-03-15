@@ -50,8 +50,8 @@ alert("Please fill all the fields");
       formData.append("date", date);
       formData.append("description", description);
       formData.append("photo", photo);
-
-      const response = await axios.post("http://localhost/backend/ReportLost.php", formData,{
+      const userId=localStorage.getItem('idNumber');
+      const response = await axios.post(`http://localhost/backend/ReportLost.php?id=${userId}`, formData,{
          headers:{
           "Content-Type": "multipart/form-data"
         }

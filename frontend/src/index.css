@@ -2,8 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.dashboard {
+    background-color: rgb(248, 244, 244);
+  display: grid;
+  grid-template-columns: 200px auto;
+  gap: 10px;
+  grid-template-areas: 
+  "sidebar content"
+
+}
+.sidebar{
+    grid-area: sidebar;
+}
+.content{
+    grid-area: content;
+}
+
+@media  (max-width:700px) {
+    .dashboard{
+        grid-template-columns: auto;
+        grid-template-areas:
+        'sidebar'
+        'content';
+    }
 }

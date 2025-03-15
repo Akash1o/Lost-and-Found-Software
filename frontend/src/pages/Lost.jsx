@@ -9,6 +9,7 @@ const Lost = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [contactDetail, setContactDetail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -20,8 +21,9 @@ const Lost = () => {
   // Fetch data from PHP API on component mount
   useEffect(() => {
     setLoading(true);
+    const userId = localStorage.getItem("idNumber")
     axios
-      .get("http://localhost/backend/Lost.php")
+      .get(`http://localhost/backend/Lost.php?id=${userId}`)
       .then((response) => {
         if (response.data.success) {
           setFormData(response.data.item);
@@ -44,12 +46,25 @@ const Lost = () => {
   // Filter the formData based on the search query
   const filteredData = formData.filter(
     (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.date.includes(searchQuery)
+      // item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.item.toLowerCase().includes(searchQuery.toLowerCase())
+    // item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    // item.date.includes(searchQuery)
   );
+  const handleContactData = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost/backend/contact.php?id=${id}`);
 
+      if (response.status === 200) {
+        setContactDetail(response.data);
+      } else {
+        console.error("Error fetching contact data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  // console.log(contactDetail.items[0].fullname)
   return (
     <div className="bg-gradient-to-br from-pink-100 to-yellow-100 ">
       <h1
@@ -68,7 +83,7 @@ const Lost = () => {
       <div className="flex flex-col five:flex-row gap-2 justify-center items-center my-4 mb-6">
         <input
           type="text"
-          placeholder="Search for items"
+          placeholder="Search for itemsName"
           className="border-2 border-blue-400 text-center rounded-full p-3 w-[80%] five:w-[360px] mr-4"
           value={searchQuery}
           onChange={handleSearchChange}
@@ -84,7 +99,7 @@ const Lost = () => {
         </button>
       </div>
 
-      <div className="mt-[55px]">
+      <div className="mt-[55px]  ">
         {loading ? (
           <h3>Loading...</h3>
         ) : error ? (
@@ -115,15 +130,16 @@ const Lost = () => {
                     className="my-4  w-full h-[150px] rounded-lg"
                   />
                   <div>
-                    <p className="font-bold text-lg">{items.item}</p>
-                    <p>Location: {items.location}</p>
+                    <p className=" text-lg"><span className="font-bold">ItemName: </span>{items.item}</p>
+                    <p><span className="font-bold">Location: </span>{items.location}</p>
                   </div>
 
                   <div className="my-4 h-[80px] overflow-y-auto">
+                    <h1 className="font-bold">Description</h1>
                     <p>{items.description}</p>
                   </div>
                   <div className="flex justify-end">
-                    <button className="bg-red-600 text-white rounded-2xl p-2 px-4 hover:bg-slate-600">
+                    <button onClick={() => handleContactData(items.userId)} className="bg-red-600 text-white rounded-2xl p-2 px-4 hover:bg-blue-600">
                       Contact
                     </button>
                   </div>
@@ -132,11 +148,29 @@ const Lost = () => {
             ))}
           </ul>
         ) : (
-          <h3 className="h-[200px] flex justify-center text-4xl text-red-500 items-center">
-            No items found.
-          </h3>
+          <div className="h-[200px] flex justify-center text-4xl text-red-500 items-center ">
+            <h3> No items found.</h3>
+          </div>
         )}
       </div>
+      {
+        contactDetail && <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }} className="fixed top-0 w-[100%] h-[100%] z-[1000]">
+        <p className="text-white w-[80%] p-[10px]">This is about how to contact this person you can take the given information and contact, so that it will make easy to get your lost materials.</p>
+         <div className="h-[100%] w-[100%] flex justify-center items-center">
+         
+          <div className="flex  gap-5 flex-col border border-purple-500 p-[20px] bg-white rounded-lg">
+         
+            <h1 >Name: {contactDetail.items[0].fullname}</h1>
+            <p >Faculty: {contactDetail.items[0].faculty}</p>
+            <p >Email: {contactDetail.items[0].email}</p>
+            <p >Phone: {contactDetail.items[0].contact}</p>
+          </div>
+          <div className="absolute right-4 top-4">
+            <button className="bg-red-500 px-3 py-1 text-white rounded-lg" onClick={()=>setContactDetail(null)}>x</button>
+          </div>
+          </div>
+        </div>
+      }
     </div>
   );
 };

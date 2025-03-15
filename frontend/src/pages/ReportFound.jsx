@@ -7,77 +7,78 @@ const ReportFound = () => {
 
 
 
-  const[foundFormData,setFoundFormData]=useState({
+  const [foundFormData, setFoundFormData] = useState({
     name: '',
     item: '',
     location: '',
     date: '',
     description: '',
-    photo:null,
+    photo: null,
   })
 
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
-    setFoundFormData({...foundFormData,[name]:value})
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFoundFormData({ ...foundFormData, [name]: value })
   }
 
-  const handlePhotoChange=(e)=>{
-    const file=e.target.files[0];
-    if(file){
-      setFoundFormData({...foundFormData,photo:file})
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFoundFormData({ ...foundFormData, photo: file })
     }
   }
 
-  const handleSubmit=(event)=>{
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const userId=localStorage.getItem('idNumber')
     const { name, item, location, date, description, photo } = foundFormData;
-    if (!name || !item || !location || !date || !description || !photo){
-alert("Please fill all the fields");
+    if (!name || !item || !location || !date || !description || !photo) {
+      alert("Please fill all the fields");
     }
-else{
-  // console.log(foundFormData);
-  // console.log(foundFormDataArray);
+    else {
+      // console.log(foundFormData);
+      // console.log(foundFormDataArray);
 
-  const foundFormData=new FormData();
-  foundFormData.append("name",name);
-  foundFormData.append("item",item);
-  foundFormData.append("location",location);
-  foundFormData.append("date",date);
-  foundFormData.append("description",description);
-  foundFormData.append("photo",photo);
+      const foundFormData = new FormData();
+      foundFormData.append("name", name);
+      foundFormData.append("item", item);
+      foundFormData.append("location", location);
+      foundFormData.append("date", date);
+      foundFormData.append("description", description);
+      foundFormData.append("photo", photo);
 
-   axios.post("http://localhost/backend/reportFound.php",foundFormData,{
-    headers:{
-      "Content-Type":"multipart/form-data"
+     await axios.post(`http://localhost/backend/reportFound.php?userId=${userId}`, foundFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+        .then(response => {
+          console.log("upload sucessfully", response.data)
+
+          alert(response.data.message);
+        })
+
+        .catch(error => {
+          console.log("error while uploading", error)
+        });
+
+      // updatedFoundFormData(foundFormData);
+
+
+      setFoundFormData({
+        name: '',
+        item: '',
+        location: '',
+        date: '',
+        description: '',
+        photo: null,
+      })
     }
-  })
-  .then(response=>{
-console.log("upload sucessfully",response.data)
-
-    alert(response.data.message);
-  })
-
-  .catch(error=>{
-    console.log("error while uploading",error)
-  });
-
-  // updatedFoundFormData(foundFormData);
-
-
-  setFoundFormData({
-    name: '',
-    item: '',
-    location: '',
-    date: '',
-    description: '',
-    photo:null,
-  })
-}
   }
 
   return (
     <div className='bg-gradient-to-br from-pink-100 to-yellow-100'>
-       
+
       <h1
         className="flex justify-center text-3xl six:text-6xl"
         style={{
@@ -106,6 +107,7 @@ console.log("upload sucessfully",response.data)
             type="text"
             id="name"
             name="name"
+            placeholder='Enter your name'
             value={foundFormData.name}
             onChange={handleChange}
             className="mt-1 block  w-full rounded-md border-gray-300 shadow-sm outline-none p-2 focus:border-indigo-500 focus:ring-indigo-500"

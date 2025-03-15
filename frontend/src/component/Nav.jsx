@@ -82,12 +82,7 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
             Profile
           </button>
 
-          <button
-            className="hover:border-b-2 hover:border-green-500 px-2"
-            onClick={() => handleNavigate("/admin")}
-          >
-            Admin
-          </button>
+      
         </div>
       )}
 
@@ -155,12 +150,12 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               Profile
             </li>
-            <li
+            {/* <li
               className="hover:border-b-2 hover:border-green-500 cursor-pointer"
               onClick={() => handleNavigate("/admin")}
             >
               Admin
-            </li>
+            </li> */}
 
             <li>
             <button
